@@ -26,7 +26,13 @@ class m170112_020825_data_view extends Migration
             AND TIMEDIFF(d2.date, d1.date) < MAKETIME(0, 30,0) 
             AND TIMEDIFF(d2.date, d1.date) > MAKETIME(0, 0,0))
         UNION
-        SELECT *
+        SELECT 
+        	d3.id as id, 
+	        d3.card_number AS card_number, 
+	        d3.date AS date, 
+	        FLOOR(d3.volume * 100)/100 AS volume,
+	        d3.service AS service, 
+	        d3.address_id AS address_id
         FROM `data` AS d3
         WHERE NOT EXISTS (
 	        SELECT * FROM `data` AS d4
